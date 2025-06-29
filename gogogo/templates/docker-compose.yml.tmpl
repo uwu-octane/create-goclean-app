@@ -1,0 +1,45 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    container_name: {{ .ProjectName }}_app
+    ports:
+      - "8080:8080"
+{{- if ne .DB "none" }}
+    depends_on:
+      - db
+{{- end }}{{ if .UseMQ }}
+      - rabbitmq
+{{- end }}
+
+{{- if eq .DB "postgres" }}
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: dbname
+    ports:
+      - "5432:5432"
+{{- else if eq .DB "mysql" }}
+  db:
+    image: mysql:8.3
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: dbname
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    ports:
+      - "3306:3306"
+{{- end }}{{ if .UseMQ }}
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+{{- end }}
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379" 

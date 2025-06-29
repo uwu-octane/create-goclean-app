@@ -1,0 +1,15 @@
+package mysql
+
+import (
+    "fmt"
+    "database/sql"
+
+    _ "github.com/go-sql-driver/mysql"
+
+    "{{ .ModuleName }}/internal/config"
+)
+
+func New(cfg config.DB) (*sql.DB, error) {
+    dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?parseTime=true", cfg.User, cfg.Password, cfg.Host, cfg.Port, cfg.Name)
+    return sql.Open("mysql", dsn)
+} 

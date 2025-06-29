@@ -1,0 +1,15 @@
+package postgres
+
+import (
+    "fmt"
+    "database/sql"
+
+    _ "github.com/lib/pq"
+
+    "{{ .ModuleName }}/internal/config"
+)
+
+func New(cfg config.DB) (*sql.DB, error) {
+    dsn := fmt.Sprintf("postgres://%s:%s@%s:%d/%s?sslmode=disable", cfg.User, cfg.Password, cfg.Host, cfg.Port, cfg.Name)
+    return sql.Open("postgres", dsn)
+} 

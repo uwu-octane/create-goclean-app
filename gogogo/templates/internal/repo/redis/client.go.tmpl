@@ -1,0 +1,17 @@
+package redis
+
+import (
+    "context"
+
+    goredis "github.com/redis/go-redis/v9"
+
+    "{{ .ModuleName }}/internal/config"
+)
+
+func New(cfg config.Redis) *goredis.Client {
+    return goredis.NewClient(&goredis.Options{Addr: cfg.Addr})
+}
+
+func Ping(ctx context.Context, rdb *goredis.Client) error {
+    return rdb.Ping(ctx).Err()
+} 

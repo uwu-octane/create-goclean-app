@@ -1,0 +1,31 @@
+package config
+
+type DB struct {
+    Host     string
+    Port     int
+    User     string
+    Password string
+    Name     string
+}
+
+type Redis struct {
+    Addr string
+}
+
+type Config struct {
+    DB    DB
+    Redis Redis
+}
+
+func Default() Config {
+    return Config{
+        DB: DB{
+            Host: "localhost",
+            Port: 5432,
+            User: "user",
+            Password: "pass",
+            Name: "dbname",
+        },
+        Redis: Redis{Addr: "localhost:6379"},
+    }
+} 

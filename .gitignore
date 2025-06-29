@@ -1,0 +1,27 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Vendor directory
+vendor/
+
+# Environment variables
+.env
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Go specific
+/go.sum
+/go.mod 

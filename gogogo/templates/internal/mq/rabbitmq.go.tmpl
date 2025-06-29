@@ -1,0 +1,9 @@
+package mq
+
+import (
+    "github.com/rabbitmq/amqp091-go"
+)
+
+func New() (*amqp.Connection, error) {
+    return amqp.Dial("amqp://guest:guest@localhost:5672/")
+} 
