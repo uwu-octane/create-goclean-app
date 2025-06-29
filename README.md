@@ -43,7 +43,7 @@ Run the generator to create a new project:
 
 ```bash
 cd /path/to/your/workspace
-$GOBIN/gogogo
+gogogo
 ```
 
 Follow the interactive prompts to set up your project.
